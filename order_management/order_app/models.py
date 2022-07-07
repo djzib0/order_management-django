@@ -7,8 +7,8 @@ class Employee(models.Model):
     # user = models.OneToOneField(User, null=True, blank=True, on_delete=models.CASCADE)
     name = models.CharField(max_length=200, null=True)
     surname = models.CharField(max_length=200, null=True)
-    phone = models.CharField(max_length=200, null=True)
-    email = models.EmailField(max_length=100, null=True)
+    phone = models.CharField(max_length=200, null=True, blank=True)
+    email = models.EmailField(max_length=100, null=True, blank=True)
     date_added = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -24,6 +24,7 @@ class Product(models.Model):
     price = models.FloatField(null=True)
     category = models.CharField(max_length=200, choices=CATEGORY, null=True)
     description = models.CharField(max_length=500, null=True)
+    quantity = models.PositiveIntegerField(default=0, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name}"
@@ -36,11 +37,23 @@ class Order(models.Model):
         ('Zamówiono', 'Zamówiono'),
         ('Dostarczono', 'Dostarczono'),
     )
-    user = models.ForeignKey(Employee, null=True, on_delete=models.SET_NULL)
-    product = models.ForeignKey(Product, null=True, on_delete=models.SET_NULL)
+    employee = models.ForeignKey(Employee, null=True, blank=True, on_delete=models.SET_NULL)
+    # product = models.ManyToManyField(Product, through="OrderProduct")
+    product = models.ManyToManyField(Product, through="OrderProduct")
     date_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=200, choices=STATUS, null=True)
-    note = models.CharField(max_length=1000, null=True)
+    note = models.CharField(max_length=1000, null=True, blank=True)
+    note1 = models.CharField(max_length=1000, null=True, blank=True)
 
     def __str__(self):
-        return f"{self.product}"
+        return f"{self.id}"
+
+
+class OrderProduct(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField()
+
+    def __str__(self):
+        return f"Zamówienie {self.order.id}"
+
