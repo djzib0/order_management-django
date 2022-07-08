@@ -1,8 +1,40 @@
 {% extends 'order_app/base.html' %}
 
 {% block content %}
-{% include 'order_app/navbar.html' %}
 
-<h3>Index view</h3>
 
-{% endblock content %}
+	<br>
+
+<div class="row">
+	<div class="col-md">
+		<div class="card card-body" style="margin: 10px;">
+			<h5>Użytkownicy</h5>
+			<hr>
+			<a class="btn btn-outline-success  btn-sm btn-block" style="margin: 2px;" href="">Dodaj użytkownika</a>
+			<a class="btn btn-outline-info  btn-sm btn-block" style="margin: 2px;" href="">Edytuj użytkownika</a>
+			<a class="btn btn-outline-danger  btn-sm btn-block" style="margin: 2px;" href="">Usuń użytkownika</a>
+
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Contact Information</h5>
+			<hr>
+			<p>Email: </p>
+			<p>Phone: </p>
+		</div>
+	</div>
+
+	<div class="col-md">
+		<div class="card card-body">
+			<h5>Total Orders</h5>
+			<hr>
+			<h1 style="text-align: center;padding: 10px"></h1>
+		</div>
+	</div>
+</div>
+
+
+
+{% endblock %}
