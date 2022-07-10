@@ -1,6 +1,9 @@
 {% extends 'order_app/base.html' %}
 
 {% block content %}
-<p>content</p>
+{% for product in order_products %}
+{{ product.product }}
+{{ product.quantity }}
+{% endfor %}
 
 {% endblock content %}

@@ -1,0 +1,34 @@
+{% extends 'order_app/base.html' %}
+
+{% block content %}
+
+
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Zamawiający</th>
+      <th scope="col">Status</th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for order in orders %}
+    <tr>
+      <th scope="row">{{ forloop.counter }}</th>
+      <td>{{ order.employee }}</td>
+      <td>{{ order.status }}</td>
+      <td><a href="{% url 'order_app:order' order.id %}">Zobacz</a></td>
+      <td><a href="">Edytuj {{ order.id }}</a></td>
+      <td><a href="">Usuń</a></td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+
+
+{% endblock content %}
+

@@ -25,6 +25,7 @@ class Product(models.Model):
     category = models.CharField(max_length=200, choices=CATEGORY, null=True)
     description = models.CharField(max_length=500, null=True)
     quantity = models.PositiveIntegerField(default=0, null=True, blank=True)
+    delivered = models.BooleanField(default=False)
 
     def __str__(self):
         return f"{self.name}"

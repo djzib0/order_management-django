@@ -6,35 +6,50 @@
 	<br>
 
 <div class="row">
-	<div class="col-md">
-		<div class="card card-body" style="margin: 10px;">
-			<h5>Użytkownicy</h5>
-			<hr>
-			<a class="btn btn-outline-success  btn-sm btn-block"
-			   style="margin: 2px;" href="{% url 'order_app:add_user' %}">Dodaj użytkownika</a>
-			<a class="btn btn-outline-info  btn-sm btn-block" style="margin: 2px;" href="">Edytuj użytkownika</a>
-			<a class="btn btn-outline-danger  btn-sm btn-block" style="margin: 2px;" href="">Usuń użytkownika</a>
-
+	<div class="col-md-2">
+		<div class="card">
+			<div class="card-header text-center bg-dark text-white">MENU</div>
+ 		    <div class="card-body bg-secondary text-white">
+				<a class="btn btn-secondary btn-sm btn-block" style="margin: 2px;"
+				   href="{% url 'order_app:orders' %}">ZAMÓWIENIA</a>
+				<a class="btn btn-secondary  btn-sm btn-block" style="margin: 2px;" href="">UŻYTKOWNICY</a>
+				<a class="btn btn-secondary  btn-sm btn-block" style="margin: 2px;" href="">PRODUKTY</a>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+			</div>
 		</div>
 	</div>
 
-	<div class="col-md">
-		<div class="card card-body" style="margin: 10px;">
-			<h5>Contact Information</h5>
-			<hr>
-			<p>Email: </p>
-			<p>Phone: </p>
-			<p>Phone: </p>
-			<p>Phone: </p>
-			<p>Phone: </p>
+	<div class="col-md-3">
+		<div class="card">
+			<div class="card-header text-center bg-dark text-white">Ilość zleceń w trakcie realizacji</div>
+ 		    <div class="card-body">
+<!--				<h5 class="card-title">Special title treatment</h5>-->
+				<p class="card-text text-center">{{ pending }}</p>
+				<a class="btn btn-info  btn-sm btn-block" style="margin: 2px;" href="">Zobacz</a>
+			</div>
 		</div>
 	</div>
 
-	<div class="col-md-8">
-		<div class="card card-body" style="margin: 10px;">
-			<h5>Total Orders</h5>
-			<hr>
-
+	<div class="col-md-3">
+		<div class="card">
+			<div class="card-header text-center bg-dark text-white">Ilość zamówionych zleceń</div>
+ 		    <div class="card-body">
+				<p class="card-text text-center">{{ ordered }}</p>
+				<a class="btn btn-info  btn-sm btn-block" style="margin: 2px;" href="">Zobacz</a>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+		<div class="card">
+			<div class="card-header text-center bg-dark text-white">Ilość dostarczonych zleceń</div>
+ 		    <div class="card-body">
+				<p class="card-text text-center">{{ delivered }}</p>
+				<a class="btn btn-info  btn-sm btn-block" style="margin: 2px;" href="">Zobacz</a>
+			</div>
 		</div>
 	</div>
 </div>

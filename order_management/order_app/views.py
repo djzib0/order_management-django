@@ -31,6 +31,22 @@ def indexView(request):
     return render(request, template, context)
 
 
+def ordersView(request):
+    orders = Order.objects.all()
+
+
+    context = {'orders': orders}
+    template = 'order_app/orders.html'
+    return render(request, template, context)
+
+def orderProductView(request, order_pk):
+    all_products = OrderProduct.objects.all()
+    order_products = all_products.filter(order=Order.objects.get(id=order_pk))
+
+    context = {'order_products': order_products}
+    template = 'order_app/order.html'
+    return render(request, template, context)
+
 def addUserView(request):
     if request.method != "POST":
         form = AddUserForm()
@@ -42,6 +58,9 @@ def addUserView(request):
     context = {'form': form}
     template = 'order_app/add_user.html'
     return render(request, template, context)
+
+
+
 
 
 
