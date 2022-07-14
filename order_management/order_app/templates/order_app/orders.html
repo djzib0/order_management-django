@@ -21,7 +21,7 @@
       <td>{{ order.employee }}</td>
       <td>{{ order.status }}</td>
       <td><a href="{% url 'order_app:order' order.id %}">Zobacz</a></td>
-      <td><a href="">Edytuj</a></td>
+      <td><a href="{% url 'order_app:edit_order' order.id %}">Edytuj</a></td>
       <td><a href="">Usuń</a></td>
     </tr>
     {% endfor %}

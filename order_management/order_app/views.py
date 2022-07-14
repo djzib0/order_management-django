@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db.models import Count, Sum, F
 from .models import *
-from .forms import AddUserForm, OrderProductForm
+from .forms import AddUserForm, OrderProductForm, OrderForm
 
 # Create your views here.
 def indexView(request):
@@ -12,13 +12,13 @@ def indexView(request):
     total_employees = employees.count()
     total_orders = orders.count()
     STATUS = (
-        ('W trakcie zamówienia', 'W trakcie zamówienia'),
+        ('W przygotowaniu', 'W przygotowaniu'),
         ('Zamówiono', 'Zamówiono'),
         ('Dostarczono', 'Dostarczono'),
     )
-    pending = orders.filter(status='W trakcie zamówienia').count()
-    ordered = orders.filter(status='Zamówione').count()
-    delivered = orders.filter(status='Dostarczone').count()
+    pending = orders.filter(status='W przygotowaniu').count()
+    ordered = orders.filter(status='Zamówiono').count()
+    delivered = orders.filter(status='Dostarczono').count()
 
     context = {'orders': orders,
                'total_employees': total_employees,
@@ -54,6 +54,23 @@ def orderView(request, order_pk):
                'order_total_value': order_total_value,
                }
     template = 'order_app/order.html'
+    return render(request, template, context)
+
+
+def editOrderView(request, order_pk):
+    order = Order.objects.get(id=order_pk)
+    if request.method != 'POST':
+        form = OrderForm(instance=order)
+    else:
+        form = OrderForm(instance=order, data=request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('order_app:orders')
+
+    context = {'form': form,
+               'order': order,
+               }
+    template = 'order_app/edit_order.html'
     return render(request, template, context)
 
 

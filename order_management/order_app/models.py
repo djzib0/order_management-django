@@ -36,7 +36,7 @@ class Product(models.Model):
 
 class Order(models.Model):
     STATUS = (
-        ('W trakcie zamówienia', 'W trakcie zamówienia'),
+        ('W przygotowaniu', 'W przygotowaniu'),
         ('Zamówiono', 'Zamówiono'),
         ('Dostarczono', 'Dostarczono'),
     )
@@ -44,8 +44,7 @@ class Order(models.Model):
     product = models.ManyToManyField(Product, through="OrderProduct")
     date_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=200, choices=STATUS, null=True)
-    note = models.CharField(max_length=1000, null=True, blank=True)
-    note1 = models.CharField(max_length=1000, null=True, blank=True)
+    note = models.TextField(max_length=1000, null=True, blank=True)
 
     def __str__(self):
         return f"{self.id}"

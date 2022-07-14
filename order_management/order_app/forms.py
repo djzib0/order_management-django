@@ -1,5 +1,5 @@
 from django import forms
-from .models import Employee, OrderProduct
+from .models import Employee, OrderProduct, Order
 
 class AddUserForm(forms.ModelForm):
     class Meta:
@@ -21,7 +21,20 @@ class OrderProductForm(forms.ModelForm):
             'product': 'Nazwa',
             'quantity': 'Ilość',
         }
+
         exclude = ['order']
+
+
+class OrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = '__all__'
+        labels = {'employee': 'Pracownik',
+                  'status': 'Status',
+                  'note': 'Uwagi',
+                  }
+        exclude = ['date_created', 'product']
+
 
 
 
