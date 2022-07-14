@@ -1,0 +1,21 @@
+{% extends 'order_app/base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card card-body">
+            <form method="POST" action="{% url 'order_app:edit_order_product' order_product.id %}">
+                <table class="nav-item">
+                    <th></th>
+                    <th></th>
+                {% csrf_token %}
+                {{ form.as_table }}
+                </table>
+                <button class="btn btn-info" type="submit" style="margin: 5px;">Zapisz</button>
+            </form>
+            <a href="{% url 'order_app:order' order.id %}"><button class="btn btn-danger" type="submit" style="margin: 5px;">Anuluj</button></a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

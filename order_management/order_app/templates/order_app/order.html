@@ -1,9 +1,66 @@
 {% extends 'order_app/base.html' %}
 
 {% block content %}
-{% for product in order_products %}
-{{ product.product }}
-{{ product.quantity }}
-{% endfor %}
+
+
+<div class="row">
+    <div class="col-md d-flex justify-content-center">
+      <div class="card border-info" style="margin: 10px;">
+        <div class="card-header bg-info text-white">
+          <h5 class="card-title">Zamówienie nr {{ order }}
+          złożone przez {{ order.employee }}
+          w dniu {{ order.date_created|date:"d, M, Y" }}</h5>
+        </div>
+          <p>
+            <a class="btn btn-outline-success btn-sm" style="margin: 5px;" href="{% url 'order_app:orders' %}">Wróć</a>
+            <a class="btn btn-success btn-sm" style="margin: 5px;"
+               href="{% url 'order_app:add_order_product' order.id %}">Dodaj nową pozycję do zamówienia</a>
+          </p>
+          <h4 style="margin-left: 5px;">Szczegóły zamówienia</h4>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item border-info">
+              <table class="table">
+                <thead>
+                  <tr class="text-center">
+                    <th scope="col">#</th>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col">Ilość</th>
+                    <th scope="col">Kategoria</th>
+                    <th scope="col">Cena/szt.</th>
+                    <th scope="col">Razem</th>
+                    <th scope="col"></th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for order_product in order_products %}
+                  <tr class="text-center">
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{ order_product.product }}</td>
+                    <td>{{ order_product.quantity }}</td>
+                    <td>{{ order_product.product.category }}</td>
+                    <td>{{ order_product.product.price|floatformat:2 }} PLN</td>
+                    <td>{{ order_product.total_price|floatformat:2 }} PLN</td>
+                    <td><a class="btn btn-sm btn-info" href="{% url 'order_app:edit_order_product' order_product.id %}">Edytuj</a></td>
+                    <td><a class="btn btn-sm btn-danger" href="{% url 'order_app:delete_order_product' order_product.id %}">Usuń</a></td>
+                  </tr>
+                {% endfor %}
+                  <tr class="text-center">
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td><b>Suma:</b></td>
+                    <td>{{ order_total_value.total_price__sum }} PLN</td>
+                  </tr>
+                  <tr>
+                  </tr>
+              </table>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</div>
 
 {% endblock content %}

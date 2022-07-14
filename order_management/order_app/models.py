@@ -30,7 +30,9 @@ class Product(models.Model):
     def __str__(self):
         return f"{self.name}"
 
-
+    @property
+    def multiply_price_quantity(self):
+        return 2
 
 class Order(models.Model):
     STATUS = (
@@ -39,7 +41,6 @@ class Order(models.Model):
         ('Dostarczono', 'Dostarczono'),
     )
     employee = models.ForeignKey(Employee, null=True, blank=True, on_delete=models.SET_NULL)
-    # product = models.ManyToManyField(Product, through="OrderProduct")
     product = models.ManyToManyField(Product, through="OrderProduct")
     date_created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=200, choices=STATUS, null=True)
@@ -50,10 +51,12 @@ class Order(models.Model):
         return f"{self.id}"
 
 
+
+
 class OrderProduct(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField()
+    quantity = models.PositiveIntegerField()
 
     def __str__(self):
         return f"Zamówienie {self.order.id}"
