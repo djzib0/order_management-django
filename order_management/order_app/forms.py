@@ -36,5 +36,17 @@ class OrderForm(forms.ModelForm):
         exclude = ['date_created', 'product']
 
 
+class addOrderForm(forms.ModelForm):
+    class Meta:
+        model = Order
+        fields = '__all__'
+        labels = {'employee': 'Pracownik',
+                  'status': 'Status',
+                  'note': 'Uwagi',
+                  }
+        exclude = ['product']
+
+
+
 
 

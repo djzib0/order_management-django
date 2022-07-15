@@ -50,8 +50,12 @@
                     <td></td>
                     <td></td>
                     <td></td>
+                    {% if order_total_value.total_price__sum %}
                     <td><b>Suma:</b></td>
                     <td>{{ order_total_value.total_price__sum }} PLN</td>
+                    {% else %}
+                    <td></td>
+                    {% endif %}
                   </tr>
                   <tr>
                   </tr>
