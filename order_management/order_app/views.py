@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db.models import Count, Sum, F
 from .models import *
-from .forms import AddUserForm, OrderProductForm, OrderForm
+from .forms import AddUserForm, OrderProductForm, OrderForm, addOrderForm
 
 # Create your views here.
 def indexView(request):
@@ -33,10 +33,10 @@ def indexView(request):
 
 
 def ordersView(request):
-    orders = Order.objects.all()
+    orders = Order.objects.all().annotate(total_price=Sum(F('orderproduct__quantity')*F('product__price')))
 
-
-    context = {'orders': orders}
+    context = {'orders': orders,
+               }
     template = 'order_app/orders.html'
     return render(request, template, context)
 
@@ -54,6 +54,20 @@ def orderView(request, order_pk):
                'order_total_value': order_total_value,
                }
     template = 'order_app/order.html'
+    return render(request, template, context)
+
+
+def addOrderView(request):
+    if request.method != 'POST':
+        form = addOrderForm()
+    else:
+        form = addOrderForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('order_app:orders')
+
+    context = {'form': form}
+    template = 'order_app/add_order.html'
     return render(request, template, context)
 
 
