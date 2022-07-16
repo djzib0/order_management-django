@@ -88,6 +88,18 @@ def editOrderView(request, order_pk):
     return render(request, template, context)
 
 
+def deleteOrderView(request, order_pk):
+    order = Order.objects.get(id=order_pk)
+    if request.method == 'POST':
+        order.delete()
+        return redirect('order_app:orders')
+
+    context = {}
+    template = 'order_app/delete_order.html'
+
+    return render(request, template, context)
+
+
 def addOrderProductView(request, order_pk):
     order = Order.objects.get(id=order_pk)
     if request.method != "POST":

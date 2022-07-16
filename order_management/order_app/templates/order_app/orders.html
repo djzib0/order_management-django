@@ -40,8 +40,8 @@
                     {% endif %}
                     <td></td>
                     <td><a class="btn btn-sm btn-success" href="{% url 'order_app:order' order.id %}">Zobacz</a></td>
-                    <td><a class="btn btn-sm btn-info" href="">Edytuj</a></td>
-                    <td><a class="btn btn-sm btn-danger" href="">Usuń</a></td>
+                    <td><a class="btn btn-sm btn-info" href="{% url 'order_app:edit_order' order.id %}">Edytuj</a></td>
+                    <td><a class="btn btn-sm btn-danger" href="{% url 'order_app:delete_order' order.id %}">Usuń</a></td>
                   </tr>
                 {% endfor %}
                   <tr>

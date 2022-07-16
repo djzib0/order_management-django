@@ -12,6 +12,7 @@ urlpatterns = [
     path('orders/<int:order_pk>/', orderView, name='order'),
     path('add_order/', addOrderView, name='add_order'),
     path('edit_orders/<int:order_pk>/', editOrderView, name='edit_order'),
+    path('delete_order/<int:order_pk>/', deleteOrderView, name='delete_order'),
 
     path('orders/add_order_product/<int:order_pk>/', addOrderProductView, name='add_order_product'),
     path('orders/edit_order_product/<int:order_product_pk>/', editOrderProductView, name='edit_order_product'),
