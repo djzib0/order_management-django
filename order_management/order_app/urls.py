@@ -17,4 +17,8 @@ urlpatterns = [
     path('orders/add_order_product/<int:order_pk>/', addOrderProductView, name='add_order_product'),
     path('orders/edit_order_product/<int:order_product_pk>/', editOrderProductView, name='edit_order_product'),
     path('orders/delete_order_product/<int:order_product_pk>/', deleteOrderProduct, name='delete_order_product'),
+
+    path('users/', usersView, name='users'),
+    path('add_user', addUserView, name='add_user'),
+    path('edit_user/<int:employee_pk>/', editUserView, name='edit_user'),
 ]

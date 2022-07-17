@@ -152,6 +152,13 @@ def deleteOrderProduct(request, order_product_pk):
     return render(request, template, context)
 
 
+def usersView(request):
+    users = Employee.objects.all()
+
+    context = {'users': users}
+    template = 'order_app/users.html'
+
+    return render(request, template, context)
 
 
 def addUserView(request):
@@ -165,6 +172,24 @@ def addUserView(request):
     context = {'form': form}
     template = 'order_app/add_user.html'
     return render(request, template, context)
+
+
+def editUserView(request, employee_pk):
+    employee = Employee.objects.get(id=employee_pk)
+    if request.method != 'POST':
+        form = AddUserForm(instance=employee)
+    else:
+        form = AddUserForm(instance=employee, data=request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('order_app:users')
+
+    context = {'employee': employee,
+               'form': form,
+               }
+    template = 'order_app/edit_user.html'
+    return render(request, template, context)
+
 
 
 

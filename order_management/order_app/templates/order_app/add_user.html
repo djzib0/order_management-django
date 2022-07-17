@@ -10,10 +10,16 @@
                     <th></th>
                 {% csrf_token %}
                 {{ form.as_table }}
-                </table>
-                <button class="btn btn-info" type="submit" style="margin: 5px;">Zapisz</button>
+                <tr>
+                    <td>
+                        <button class="btn btn-info" type="submit" style="margin: 5px;">Zapisz</button>
+                    </td>
             </form>
-            <a href="{% url 'order_app:index' %}"><button class="btn btn-danger" type="submit" style="margin: 5px;">Anuluj</button></a>
+                    <td>
+                        <a href="{% url 'order_app:users' %}" class="btn btn-danger" style="margin: 5px;">Anuluj</></a>
+                    </td>
+                </tr>
+                </table>
         </div>
     </div>
 </div>

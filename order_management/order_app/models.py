@@ -14,6 +14,9 @@ class Employee(models.Model):
     def __str__(self):
         return f"{self.name.title()} {self.surname.title()}"
 
+    def formatted_phone(self):
+        return f"{self.phone} test"
+
 
 class Product(models.Model):
     CATEGORY = (

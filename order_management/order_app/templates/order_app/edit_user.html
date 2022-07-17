@@ -1,0 +1,11 @@
+{% extends 'order_app/base.html' %}
+
+{% block content %}
+
+<form method="post" action="{% url 'order_app:edit_user' employee.id %}">
+    {% csrf_token %}
+    {{ form.as_table }}
+    <button class="'btn btn-info" type="submit">Zapisz</button>
+</form>
+
+{% endblock content %}
