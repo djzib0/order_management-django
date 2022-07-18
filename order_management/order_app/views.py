@@ -233,14 +233,13 @@ def editProductView(request, product_pk):
     return render(request, template, context)
 
 
+def deleteProduct(request, product_pk):
+    product = Product.objects.get(id=product_pk)
+    if request.method == 'POST':
+        product.delete()
+        return redirect('order_app:products')
 
+    context = {}
+    template = 'order_app/delete_product.html'
 
-
-
-
-
-
-
-
-
-
+    return render(request, template, context)
