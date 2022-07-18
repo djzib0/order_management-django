@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.db.models import Count, Sum, F
 from .models import *
-from .forms import AddUserForm, OrderProductForm, OrderForm, addOrderForm
+from .forms import AddUserForm, OrderProductForm, OrderForm, addOrderForm, ProductForm
 
 # Create your views here.
 def indexView(request):
@@ -189,6 +189,51 @@ def editUserView(request, employee_pk):
                }
     template = 'order_app/edit_user.html'
     return render(request, template, context)
+
+
+def productsView(reqeust):
+    products = Product.objects.all()
+
+    context = {'products': products}
+    template = 'order_app/products.html'
+    return render(reqeust, template, context)
+
+
+def addProductView(request):
+
+    if request.method != 'POST':
+        form = ProductForm()
+    else:
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('order_app:products')
+
+    context = {'form': form}
+    template = 'order_app/add_product.html'
+
+    return render(request, template, context)
+
+
+def editProductView(request, product_pk):
+    product = Product.objects.get(id=product_pk)
+    if request.method != 'POST':
+        form = ProductForm(instance=product)
+    else:
+        form = ProductForm(instance=product, data=request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect('order_app:products')
+
+    context = {'form': form,
+               'product': product,
+               }
+    template = 'order_app/edit_product.html'
+
+    return render(request, template, context)
+
+
+
 
 
 

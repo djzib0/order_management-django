@@ -26,7 +26,7 @@ class Product(models.Model):
     name = models.CharField(max_length=200, null=True)
     price = models.FloatField(null=True)
     category = models.CharField(max_length=200, choices=CATEGORY, null=True)
-    description = models.CharField(max_length=500, null=True)
+    description = models.CharField(max_length=500, null=True, blank=True)
     quantity = models.PositiveIntegerField(default=0, null=True, blank=True)
     delivered = models.BooleanField(default=False)
 

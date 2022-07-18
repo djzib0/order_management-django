@@ -1,0 +1,18 @@
+{% extends 'order_app/base.html' %}
+
+{% block content %}
+
+<form method="post" action="{% url 'order_app:add_product' %}">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    <tr>
+        <td><button type="submit" class="btn btn-info">Dodaj</button></td>
+        </form>
+        <td><a class="btn btn-danger" href="{% url 'order_app:products' %}">Anuluj</a> </td>
+    </tr>
+    </table>
+
+
+
+{% endblock content %}
